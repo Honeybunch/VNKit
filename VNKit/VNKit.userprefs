@@ -1,0 +1,18 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\VNKit\Editor\VNKitActionEditor.cs">
+    <Files>
+      <File FileName="Assets\VNKit\Actions\Action.cs" Line="1" Column="1" />
+      <File FileName="Assets\VNKit\VNKitMaster.cs" Line="11" Column="1" />
+      <File FileName="Assets\VNKit\Actions\ChangeCharacterSpriteAction.cs" Line="14" Column="60" />
+      <File FileName="Assets\VNKit\Editor\VNKitActionEditor.cs" Line="41" Column="15" />
+      <File FileName="Assets\VNKit\Editor\VNKitNewBackgroundWizard.cs" Line="1" Column="1" />
+      <File FileName="Assets\VNKit\Editor\VNKitOverviewWindow.cs" Line="1" Column="1" />
+      <File FileName="Assets\VNKit\Editor\VNKitMasterEditor.cs" Line="1" Column="1" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>
