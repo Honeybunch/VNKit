@@ -23,6 +23,7 @@ namespace VNKit
         //Variables for zooming
         float zoomScale = 1.0f;
         Vector2 zoomOrigin = Vector2.zero;
+		Vector2 zoomDelta = Vector2.zero;
 
         //Variables for window focus
         int focusedWindowID = 0;
@@ -91,12 +92,16 @@ namespace VNKit
 
             if(Event.current.type == EventType.MouseDrag && Event.current.button == 2)
             {
-                Vector2 delta = Event.current.delta;
-                delta /= zoomScale;
-                zoomOrigin += delta;
+                zoomDelta = Event.current.delta;
+                zoomDelta /= zoomScale;
+                zoomOrigin += zoomDelta;
 
                 Event.current.Use();
             }
+			else
+			{
+				zoomDelta = Vector2.zero;
+			}
         }
 
         /// <summary>
@@ -129,7 +134,9 @@ namespace VNKit
                     {
                         Rect movedWindowRect = GUILayout.Window(i + 1, window, DrawNodeWindow, scene.Title);
 
-                        nodeWindows[i] = movedWindowRect;
+                        nodeWindows[i] = new Rect(movedWindowRect.x + zoomDelta.x, movedWindowRect.y + zoomDelta.y, 
+						                          movedWindowRect.width, movedWindowRect.height);
+
                         scene.overviewX = movedWindowRect.x;
                         scene.overviewY = movedWindowRect.y;
                     }
@@ -164,6 +171,7 @@ namespace VNKit
                 EndWindows();
 
                 EditorZoomArea.End();
+
             }
             GUILayout.EndVertical();
             //Set the scene layout rect to something reasonable

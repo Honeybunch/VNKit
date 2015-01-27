@@ -56,7 +56,7 @@ namespace VNKit
     /// zoomable area similar to Unity's built in BeginVertical and BeginArea
     /// Systems. Code based off of article found at:
     /// http://martinecker.com/martincodes/unity-editor-window-zooming/
-    /// 
+    ///  
     /// (Site may be down)
     /// </summary>
     public class EditorZoomArea
@@ -75,7 +75,7 @@ namespace VNKit
             prevMatrix = GUI.matrix;
 
             //Perform scaling
-            Matrix4x4 translation = Matrix4x4.TRS(screenCoordsArea.center, Quaternion.identity, Vector3.one);
+            Matrix4x4 translation = Matrix4x4.TRS(clippedArea.center, Quaternion.identity, Vector3.one);
             Matrix4x4 scale = Matrix4x4.Scale(new Vector3(zoomScale, zoomScale, 1.0f));
             GUI.matrix = translation * scale * translation.inverse;
 
