@@ -1,15 +1,10 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\VNKit\Editor\VNKitOverviewWindow.cs">
+  <MonoDevelop.Ide.Workspace />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\VNKit\Editor\VNKitSceneEditor.cs">
     <Files>
-      <File FileName="Assets\VNKit\Actions\Action.cs" Line="1" Column="1" />
-      <File FileName="Assets\VNKit\VNKitMaster.cs" Line="1" Column="1" />
-      <File FileName="Assets\VNKit\Actions\ChangeCharacterSpriteAction.cs" Line="1" Column="1" />
-      <File FileName="Assets\VNKit\Editor\VNKitActionEditor.cs" Line="1" Column="1" />
-      <File FileName="Assets\VNKit\Editor\VNKitNewBackgroundWizard.cs" Line="1" Column="1" />
-      <File FileName="Assets\VNKit\Editor\VNKitOverviewWindow.cs" Line="80" Column="75" />
-      <File FileName="Assets\VNKit\Editor\VNKitMasterEditor.cs" Line="1" Column="1" />
-      <File FileName="Assets\VNKit\Editor\EditorZoomArea.cs" Line="53" Column="1" />
+      <File FileName="Assets\VNKit\Editor\VNKitOverviewWindow.cs" Line="133" Column="45" />
+      <File FileName="Assets\VNKit\Editor\VNKitNewSceneWizard.cs" Line="44" Column="14" />
+      <File FileName="Assets\VNKit\Editor\VNKitSceneEditor.cs" Line="47" Column="30" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

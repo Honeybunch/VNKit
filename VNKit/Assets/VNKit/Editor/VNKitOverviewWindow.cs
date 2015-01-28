@@ -110,6 +110,8 @@ namespace VNKit
         /// </summary>
         void DrawSceneLayout() 
         {
+			GUILayout.Space(6);
+
             //Draw zoom slider 
             zoomScale = EditorGUILayout.Slider("Zoom", zoomScale, 0.5f, 2.0f);
 
@@ -200,6 +202,8 @@ namespace VNKit
                 }
             }
             GUILayout.EndHorizontal();
+
+			GUILayout.Space(6);
         }
         
         /// <summary>
@@ -209,7 +213,7 @@ namespace VNKit
         void DrawSceneInspector() 
         {
             //Scene detail area
-            GUILayout.BeginVertical();
+            GUILayout.BeginVertical(GUILayout.Width(300));
             {
                 Scene selected = null;
 
@@ -222,13 +226,18 @@ namespace VNKit
 
                 if(selected != null)
                 {
-                    GUILayout.Label(selected.Title);
+                    //Draw the inspector for the Selected scene
+					GUILayout.Label(selected.name);
+
+					SceneEditor.DrawSceneInspector(selected);
                 }
 
                 GUILayout.FlexibleSpace();
 
                 if (GUILayout.Button("Clear Selection"))
                     focusedWindowID = 0;
+
+				GUILayout.Space (12);
             }
             GUILayout.EndVertical();   
         }
@@ -236,9 +245,11 @@ namespace VNKit
         void OnGUI()
         {
             HandleEvents();
-            
+
             GUILayout.BeginHorizontal();
             {
+				GUILayout.Space(6);
+
                 //Scene Layout Area
                 GUILayout.BeginVertical();
                 {
@@ -295,7 +306,7 @@ namespace VNKit
         {
             Scene scene = scenes[id - 1].GetComponent<Scene>();
 
-            scene.Title = EditorGUILayout.TextField(scene.Title);
+			GUILayout.FlexibleSpace();
 
             if (Event.current.isMouse && Event.current.button == 0 && Event.current.type == EventType.MouseDown)
                 focusedWindowID = id;
