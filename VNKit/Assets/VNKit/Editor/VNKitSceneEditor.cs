@@ -45,7 +45,62 @@ namespace VNKit
 			scene.Title = GUILayout.TextField(scene.Title, GUILayout.Width(150));
 			scene.name = scene.Title;
 			GUILayout.EndHorizontal();
-			
+
+			bool startScene = EditorGUILayout.Toggle("Start Scene", scene.StartScene);
+			if(startScene && !scene.StartScene) //If this was toggled to true
+			{
+				//Change every other scene so that it is not the start scene
+				Scene[] scenes = (Scene[])GameObject.FindObjectsOfType<Scene>();
+				foreach(Scene s in scenes)
+				{
+					if(s != scene)
+						s.StartScene = false;
+					else
+						scene.StartScene = true;
+				}
+			}
+
+			GUILayout.Space(6);
+
+			Scene prevScene = null;
+			Scene nextScene = null;
+
+			if(scene.PrevSceneObject)
+				prevScene = scene.PrevSceneObject.GetComponent<Scene>();
+			if(scene.NextSceneObject)
+				nextScene = scene.NextSceneObject.GetComponent<Scene>();
+
+			Scene newPrevScene = EditorGUILayout.ObjectField("Prev Scene", prevScene, typeof(Scene), true) as Scene;
+			Scene newNextScene = EditorGUILayout.ObjectField("Next Scene", nextScene, typeof(Scene), true) as Scene;
+
+			if(newPrevScene != prevScene && newPrevScene != scene)
+			{
+				if(newPrevScene != null)
+				{
+					scene.PrevSceneObject = newPrevScene.gameObject;
+					newPrevScene.NextSceneObject = scene.gameObject;
+				}
+				else
+				{
+					scene.PrevSceneObject = null;
+					prevScene.NextSceneObject = null;
+				}
+			}
+
+			if(newNextScene != nextScene && newNextScene != scene)
+			{
+				if(newNextScene != null)
+				{
+					scene.NextSceneObject = newNextScene.gameObject;
+					newNextScene.PrevSceneObject = scene.gameObject;
+				}
+				else
+				{
+					scene.NextSceneObject = null;
+					nextScene.PrevSceneObject = null;
+				}
+			}
+
 			GUILayout.Space(6);
 
 			showBackgroundFoldout = EditorGUILayout.Foldout(showBackgroundFoldout, "Backgrounds");

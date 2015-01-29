@@ -123,7 +123,7 @@ namespace VNKit
 
                 EditorZoomArea.Begin(zoomScale, SceneLayoutRect);
 
-                BeginWindows();
+				BeginWindows();
 
                 //Draw node windows
                 for (int i = 0; i < nodeWindows.Count; i++)
@@ -150,7 +150,7 @@ namespace VNKit
                     
                 }
 
-                //Draw window doodads
+                //Draw window doodads below
                 for (int i = 0; i < nodeWindows.Count; i++)
                 {
                     Rect window = nodeWindows[i];
@@ -158,19 +158,43 @@ namespace VNKit
 
                     //Draw curve between this window and a connected window
                     GameObject connectedSceneObject = scene.NextSceneObject;
-
-                    for (int j = 0; j < scenes.Count; j++)
-                    {
-                        if (scenes[j] == connectedSceneObject)
-                        {
-                            Rect connectedWindow = nodeWindows[j];
-                            DrawNodeCurve(window, connectedWindow);
-                            break;
-                        }
-                    }
+					if(connectedSceneObject != null)
+					{
+	                    for (int j = 0; j < scenes.Count; j++)
+	                    {
+	                        if (scenes[j].gameObject == connectedSceneObject)
+							{
+	                            Rect connectedWindow = nodeWindows[j];
+	                            DrawNodeCurve(window, connectedWindow);
+	                            break;
+	                        }
+	                    }
+					}
                 }
 
                 EndWindows();
+
+				//Draw window doodads on top
+				for (int i = 0; i < nodeWindows.Count; i++)
+				{
+					Rect window = nodeWindows[i];
+					Scene scene = scenes[i].GetComponent<Scene>();
+					
+					//Draw a handle to identify the start scene
+					if(scene.StartScene)
+					{
+						Vector3 startPos = new Vector3(window.xMax - 5, window.yMin + 5, 0);
+
+						Handles.color = Color.gray;
+						Handles.DrawSolidDisc(startPos, new Vector3(0, 0, 1), 9);
+
+						Handles.color = Color.black;
+						Handles.DrawSolidDisc(startPos, new Vector3(0, 0, 1), 8);
+
+						Handles.color = Color.cyan;
+						Handles.DrawSolidDisc(startPos, new Vector3(0, 0, 1), 7);
+					}
+				}
 
                 EditorZoomArea.End();
 
@@ -292,10 +316,10 @@ namespace VNKit
 
             //Draw some doodads
             Handles.color = new Color(.4f, .4f, .4f);
-            Handles.DrawSolidDisc(startPos, new Vector3(0, 0, 1), 10);
+            Handles.DrawSolidDisc(startPos, new Vector3(0, 0, 1), 5);
 
             Handles.color = new Color(.7f, .7f, .7f);
-            Handles.DrawSolidDisc(endPos, new Vector3(0, 0, 1), 10);
+            Handles.DrawSolidDisc(endPos, new Vector3(0, 0, 1), 5);
         }
 
         /// <summary>
