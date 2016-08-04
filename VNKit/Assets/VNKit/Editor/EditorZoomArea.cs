@@ -61,7 +61,7 @@ namespace VNKit
     /// </summary>
     public class EditorZoomArea
     {
-        private static Stack<Matrix4x4> previousMatrixes = new Stack<Matrix4x4>();
+        private static Stack<Matrix4x4> previousMatrices = new Stack<Matrix4x4>();
 
         public static Rect Begin(float zoomScale, Rect screenCoordsArea)
         {
@@ -72,7 +72,7 @@ namespace VNKit
 
             GUI.BeginGroup(clippedArea);
 
-            previousMatrixes.Push(GUI.matrix);
+            previousMatrices.Push(GUI.matrix);
             Matrix4x4 translation = Matrix4x4.TRS(clippedArea.center, Quaternion.identity, Vector3.one);
             Matrix4x4 scale = Matrix4x4.Scale(new Vector3(zoomScale, zoomScale, 1.0f));
             GUI.matrix = translation * scale * translation.inverse;
@@ -85,7 +85,7 @@ namespace VNKit
         /// </summary>
         public static void End()
         {
-            GUI.matrix = previousMatrixes.Pop();
+            GUI.matrix = previousMatrices.Pop();
             GUI.EndGroup();
             GUI.BeginGroup(new Rect(0, 21, Screen.width, Screen.height));
         }
