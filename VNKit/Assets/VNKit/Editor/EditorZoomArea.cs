@@ -61,20 +61,18 @@ namespace VNKit
     /// </summary>
     public class EditorZoomArea
     {
-        private static Matrix4x4 prevMatrix;
+        private static Stack<Matrix4x4> previousMatrixes = new Stack<Matrix4x4>();
 
-        public static Rect Begin(float zoomScale, Rect screenCoordsArea) 
+        public static Rect Begin(float zoomScale, Rect screenCoordsArea)
         {
-            GUI.EndGroup(); //End the group that Unity began so we're not bound by the EditorWindow
+            GUI.EndGroup();
 
             Rect clippedArea = screenCoordsArea.ScaleSizeBy(1.0f / zoomScale, screenCoordsArea.center);
-            clippedArea.y += 21; //Account for the window tab
+            clippedArea.y += 21;
 
             GUI.BeginGroup(clippedArea);
 
-            prevMatrix = GUI.matrix;
-
-            //Perform scaling
+            previousMatrixes.Push(GUI.matrix);
             Matrix4x4 translation = Matrix4x4.TRS(clippedArea.center, Quaternion.identity, Vector3.one);
             Matrix4x4 scale = Matrix4x4.Scale(new Vector3(zoomScale, zoomScale, 1.0f));
             GUI.matrix = translation * scale * translation.inverse;
@@ -85,9 +83,9 @@ namespace VNKit
         /// <summary>
         /// Ends the zoom area
         /// </summary>
-        public static void End() 
+        public static void End()
         {
-            GUI.matrix = prevMatrix;
+            GUI.matrix = previousMatrixes.Pop();
             GUI.EndGroup();
             GUI.BeginGroup(new Rect(0, 21, Screen.width, Screen.height));
         }
